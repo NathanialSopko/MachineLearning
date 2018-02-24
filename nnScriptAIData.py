@@ -54,39 +54,15 @@ def preprocess():
            function
      - normalize the data to [0, 1]
      - divide the original data set to training, validation and testing set"""
+    
+    # Preparing the data set
+    with open('AI_quick_draw.pickle', 'rb') as open_ai_quick:
+        train_data = pickle.load(open_ai_quick)
+        train_label = pickle.load(open_ai_quick)
+        test_data = pickle.load(open_ai_quick)
+        test_label = pickle.load(open_ai_quick)
 
-    mat = loadmat('mnist_all.mat') #loads the MAT object as a Dictionary
-    train_data = np.concatenate((mat['train0'], mat['train1'],
-                                 mat['train2'], mat['train3'],
-                                 mat['train4'], mat['train5'],
-                                 mat['train6'], mat['train7'],
-                                 mat['train8'], mat['train9']), 0)
-    train_label = np.concatenate((np.ones((mat['train0'].shape[0], 1), dtype='uint8'),
-                                  2 * np.ones((mat['train1'].shape[0], 1), dtype='uint8'),
-                                  3 * np.ones((mat['train2'].shape[0], 1), dtype='uint8'),
-                                  4 * np.ones((mat['train3'].shape[0], 1), dtype='uint8'),
-                                  5 * np.ones((mat['train4'].shape[0], 1), dtype='uint8'),
-                                  6 * np.ones((mat['train5'].shape[0], 1), dtype='uint8'),
-                                  7 * np.ones((mat['train6'].shape[0], 1), dtype='uint8'),
-                                  8 * np.ones((mat['train7'].shape[0], 1), dtype='uint8'),
-                                  9 * np.ones((mat['train8'].shape[0], 1), dtype='uint8'),
-                                  10 * np.ones((mat['train9'].shape[0], 1), dtype='uint8')), 0)
-    test_label = np.concatenate((np.ones((mat['test0'].shape[0], 1), dtype='uint8'),
-                                 2 * np.ones((mat['test1'].shape[0], 1), dtype='uint8'),
-                                 3 * np.ones((mat['test2'].shape[0], 1), dtype='uint8'),
-                                 4 * np.ones((mat['test3'].shape[0], 1), dtype='uint8'),
-                                 5 * np.ones((mat['test4'].shape[0], 1), dtype='uint8'),
-                                 6 * np.ones((mat['test5'].shape[0], 1), dtype='uint8'),
-                                 7 * np.ones((mat['test6'].shape[0], 1), dtype='uint8'),
-                                 8 * np.ones((mat['test7'].shape[0], 1), dtype='uint8'),
-                                 9 * np.ones((mat['test8'].shape[0], 1), dtype='uint8'),
-                                 10 * np.ones((mat['test9'].shape[0], 1), dtype='uint8')), 0)
-    test_data = np.concatenate((mat['test0'], mat['test1'],
-                                mat['test2'], mat['test3'],
-                                mat['test4'], mat['test5'],
-                                mat['test6'], mat['test7'],
-                                mat['test8'], mat['test9']), 0)
-
+    
     # remove features that have same value for all points in the training data
     # convert data to double
     # normalize data to [0,1]
@@ -97,7 +73,7 @@ def preprocess():
     validation_label = np.array([])
 
 
-    print("preprocess done!")
+    print "preprocess done!"
 
     return train_data, train_label, validation_data, validation_label, test_data, test_label
 
