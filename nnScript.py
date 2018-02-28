@@ -1,4 +1,5 @@
 import numpy as np
+import math
 from scipy.optimize import minimize
 from scipy.io import loadmat
 from math import sqrt
@@ -24,8 +25,8 @@ def initializeWeights(n_in, n_out):
 def sigmoid(z):
     """# Notice that z can be a scalar, a vector or a matrix
     # return the sigmoid of input z"""
-
-    return  # your code here
+    ans = 1/(1+math.exp(-z))
+    return  ans
 
 
 def preprocess():
@@ -88,16 +89,36 @@ def preprocess():
                                 mat['test8'], mat['test9']), 0)
 
     # remove features that have same value for all points in the training data
+    dupes = (np.all(train_data == train_data[0,:], axis = 0))
+    dupes2 = (np.all(test_data == test_data[0,:], axis = 0))
+    indexes = []
+    indexes2 = []
+    for i in range(0, len(dupes)):
+        if(dupes[i] == True):
+            indexes.append(i)
+    train_data = np.delete(train_data,indexes,axis=1)
+    
+    for j in range(0, len(dupes2)):
+        if(dupes2[j] == True):
+            indexes2.append(j)
+    test_data = np.delete(test_data,indexes2,axis=1)
+    
     # convert data to double
+    train_data = train_data.astype(np.float_)
+    test_data = test_data.astype(np.float_)
+
     # normalize data to [0,1]
+    train_data = np.divide(train_data,255)
+    test_data = np.divide(test_data,255)
     
     # Split train_data and train_label into train_data, validation_data and train_label, validation_label
-    # replace the next two lines
-    validation_data = np.array([])
+    # remove validation data from training data only
+    size = len(train_data)
+    rando = np.random.permutation(size)
+    rando = rando[:6000]
+    validation_data = np.take(train_data,rando,axis=0)
+    train_data = np.delete(train_data,rando,axis=0)
     validation_label = np.array([])
-
-
-    print("preprocess done!")
 
     return train_data, train_label, validation_data, validation_label, test_data, test_label
 
