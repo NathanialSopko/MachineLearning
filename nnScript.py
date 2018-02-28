@@ -118,7 +118,8 @@ def preprocess():
     rando = rando[:6000]
     validation_data = np.take(train_data,rando,axis=0)
     train_data = np.delete(train_data,rando,axis=0)
-    validation_label = np.array([])
+    validation_label = np.take(train_label, rando, axis=0)
+    train_label = np.delete(train_label, rando, axis=0)
 
     return train_data, train_label, validation_data, validation_label, test_data, test_label
 
