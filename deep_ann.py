@@ -35,6 +35,11 @@ training_iteration_num = 3000
 
 n_hidden_1 = 256  # 1st layer number of neurons
 n_hidden_2 = 256  # 2nd layer number of neurons
+n_hidden_3 = 256
+n_hidden_4 = 256
+n_hidden_5 = 256
+n_hidden_6 = 256
+n_hidden_7 = 256
 n_input = data_train.shape[1]  # MNIST data input (img shape: 28*28)
 n_classes = label_train.shape[1]  # MNIST total classes (0-9 digits)
 dropout = 0.5
@@ -47,11 +52,21 @@ Y = tf.placeholder("float", [None, n_classes])
 weights = {
     'h1': tf.Variable(tf.random_normal([n_input, n_hidden_1])),
     'h2': tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2])),
-    'out': tf.Variable(tf.random_normal([n_hidden_2, n_classes]))
+    'h3': tf.Variable(tf.random_normal([n_hidden_2, n_hidden_3])),
+    'h4': tf.Variable(tf.random_normal([n_hidden_3, n_hidden_4])),
+    'h5': tf.Variable(tf.random_normal([n_hidden_4, n_hidden_5])),
+    'h6': tf.Variable(tf.random_normal([n_hidden_5, n_hidden_6])),
+    'h7': tf.Variable(tf.random_normal([n_hidden_6, n_hidden_7])),
+    'out': tf.Variable(tf.random_normal([n_hidden_7, n_classes]))
 }
 biases = {
     'b1': tf.Variable(tf.random_normal([n_hidden_1])),
     'b2': tf.Variable(tf.random_normal([n_hidden_2])),
+    'b3': tf.Variable(tf.random_normal([n_hidden_3])),
+    'b4': tf.Variable(tf.random_normal([n_hidden_4])),
+    'b5': tf.Variable(tf.random_normal([n_hidden_5])),
+    'b6': tf.Variable(tf.random_normal([n_hidden_6])),
+    'b7': tf.Variable(tf.random_normal([n_hidden_7])),
     'out': tf.Variable(tf.random_normal([n_classes]))
 }
 
