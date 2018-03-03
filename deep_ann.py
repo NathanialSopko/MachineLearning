@@ -80,9 +80,25 @@ def multilayer_perceptron(x):
     layer_2 = tf.add(tf.matmul(layer_1, weights['h2']), biases['b2'])
     layer_2 = tf.nn.sigmoid(layer_2)
     # layer_2 = tf.nn.dropout(layer_2, dropout)
+    
+    #3
+    layer_3 = tf.add(tf.matmul(layer_2, weights['h3']), biases['b3'])
+    layer_3 = tf.nn.sigmoid(layer_3)
+    #4
+    layer_4 = tf.add(tf.matmul(layer_3, weights['h4']), biases['b4'])
+    layer_4 = tf.nn.sigmoid(layer_4)
+    #5
+    layer_5 = tf.add(tf.matmul(layer_4, weights['h5']), biases['b5'])
+    layer_5 = tf.nn.sigmoid(layer_5)
+    #6
+    layer_6 = tf.add(tf.matmul(layer_5, weights['h6']), biases['b6'])
+    layer_6 = tf.nn.sigmoid(layer_6)
+    #7
+    layer_7 = tf.add(tf.matmul(layer_6, weights['h7']), biases['b7'])
+    layer_7 = tf.nn.sigmoid(layer_7)
 
     # Output fully connected layer with a neuron for each class
-    out_layer = tf.matmul(layer_2, weights['out']) + biases['out']
+    out_layer = tf.matmul(layer_7, weights['out']) + biases['out']
     return out_layer
 
 
